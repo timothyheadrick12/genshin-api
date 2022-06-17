@@ -2,12 +2,16 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nexusPrisma {
+    provider = "nexus-prisma"
+}
+
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
-type ArtifactsImages {
+type ArtifactImages {
   circlet_of_logos   String @map("circlet-of-logos")
   flower_of_life     String @map("flower-of-life")
   goblet_of_eonothem String @map("goblet-of-eonothem")
@@ -15,18 +19,18 @@ type ArtifactsImages {
   sands_of_eon       String @map("sands-of-eon")
 }
 
-type BossesArtifacts {
+type BossArtifact {
   max_rarity Int
   name       String
 }
 
-type BossesDrops {
+type BossDrop {
   name   String
   rarity Int
   source String
 }
 
-type BossesImages {
+type BossImages {
   ashen_heart             String? @map("ashen-heart")
   bloodjade_branch        String? @map("bloodjade-branch")
   dragon_lord_s_crown     String? @map("dragon-lord-s-crown")
@@ -78,14 +82,14 @@ type CharacterAscensionSliver {
   sources String[]
 }
 
-type CharactersConstellations {
+type CharacterConstellation {
   description String
   level       Int
   name        String
   unlock      String
 }
 
-type CharactersImages {
+type CharacterImages {
   card                        String?
   constellation               String?
   constellation_1             String? @map("constellation-1")
@@ -128,173 +132,173 @@ type CharactersOutfits {
   type        String
 }
 
-type CharactersPassiveTalents {
+type CharacterPassiveTalent {
   description String
   level       Int?
   name        String
   unlock      String
 }
 
-type CharactersSkillTalents {
+type CharacterSkillTalent {
   description String
   name        String
   type        String?
   unlock      String
-  upgrades    CharactersSkillTalentsUpgrades[]
+  upgrades    CharacterSkillTalentUpgrade[]
 }
 
-type CharactersSkillTalentsUpgrades {
+type CharacterSkillTalentUpgrade {
   name  String
   value String
 }
 
-type CommonAscensionItems {
+type CommonAscensionItem {
   id     String
   image  String?
   name   String
   rarity Int
 }
 
-type DomainsRequirements {
+type DomainRequirement {
   adventureRank    Int
   level            Int
   leyLineDisorder  String[]
   recommendedLevel Int
 }
 
-type DomainsRewards {
+type DomainReward {
   day     String
-  details DomainsRewardsDetails[]
+  details DomainRewardDetail[]
 }
 
-type DomainsRewardsDetails {
+type DomainRewardDetail {
   adventureExperience     Int
   companionshipExperience Int
-  drops                   DomainsRewardsDetailsDrops[]
-  items                   DomainsRewardsDetailsItems[]
+  drops                   DomainRewardDetailDrop[]
+  items                   DomainRewardDetailItem[]
   level                   Int
   mora                    Int
 }
 
-type DomainsRewardsDetailsDrops {
+type DomainRewardDetailDrop {
   drop_max Int
   drop_min Int
   name     String
   rarity   String?
 }
 
-type DomainsRewardsDetailsItems {
+type DomainRewardDetailItem {
   drop_max Int
   drop_min Int
   name     String
   rarity   String?
 }
 
-type ElementsReactions {
+type ElementReaction {
   description String
   elements    String[]
   name        String
 }
 
-type EnemiesAnemoboxerVanguard {
+type EnemyAnemoboxerVanguard {
   element String
   id      String
   name    String
   type    String
 }
 
-type EnemiesArtifacts {
+type EnemyArtifact {
   name   String
   rarity String
   set    String
 }
 
-type EnemiesCryogunnerLegionnaire {
+type EnemyCryogunnerLegionnaire {
   element String
   id      String
   name    String
   type    String
 }
 
-type EnemiesDescriptions {
+type EnemyDescription {
   description String
   name        String
 }
 
-type EnemiesDrops {
+type EnemyDrop {
   minimum_level Int    @map("minimum-level")
   name          String
   rarity        Int
 }
 
-type EnemiesElectrohammerVanguard {
+type EnemyElectrohammerVanguard {
   element String
   id      String
   name    String
   type    String
 }
 
-type EnemiesElementalDescription {
+type EnemyElementalDescription {
   description String
   element     String
 }
 
-type EnemiesElementalDescriptions {
+type EnemyElementalDescriptions {
   description String
   element     String
 }
 
-type EnemiesFrostarmLawachurl {
+type EnemyFrostarmLawachurl {
   description String
   id          String
   name        String
   region      String
 }
 
-type EnemiesGeochanterBracers {
+type EnemyGeochanterBracers {
   element String
   id      String
   name    String
   type    String
 }
 
-type EnemiesHydrogunnerLegionnaire {
+type EnemyHydrogunnerLegionnaire {
   element String
   id      String
   name    String
   type    String
 }
 
-type EnemiesImages {
+type EnemyImages {
   icon     String
   portrait String
 }
 
-type EnemiesPyroslingerBracers {
+type EnemyPyroslingerBracers {
   element String
   id      String
   name    String
   type    String
 }
 
-type EnemiesStonehideLawachurl {
+type EnemyStonehideLawachurl {
   description String
   id          String
   name        String
   region      String
 }
 
-type FoodsRecipe {
+type FoodRecipe {
   item     String
   quantity Int
 }
 
-type PotionsCrafting {
+type PotionCrafting {
   item     String
   quantity Int
 }
 
-type TalentBookItems {
+type TalentBookItem {
   id     String
   image  String
   name   String
@@ -308,18 +312,20 @@ type WeaponAscensionItems {
   rarity Int
 }
 
-model artifacts {
+model Artifact {
   id          String           @id @default(auto()) @map("_id") @db.ObjectId
   piece_bonus_1 String?          @map("1-piece_bonus")
   piece_bonus_2 String?          @map("2-piece_bonus")
   piece_bonus_4 String?          @map("4-piece_bonus")
   image       String?
-  images      ArtifactsImages?
+  images      ArtifactImages?
   max_rarity  Int
   name        String
+
+  @@map("artifacts")
 }
 
-model boss_material {
+model BossMaterial {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   characters String[]
   image      String
@@ -329,17 +335,19 @@ model boss_material {
   @@map("boss-material")
 }
 
-model bosses {
+model Boss {
   id          String            @id @default(auto()) @map("_id") @db.ObjectId
-  artifacts   BossesArtifacts[]
+  artifacts   BossArtifact[]
   description String
-  drops       BossesDrops[]
-  images      BossesImages
+  drops       BossDrop[]
+  images      BossImages
   name        String
   type        String
+
+  @@map("bosses")
 }
 
-model character_ascension {
+model CharacterAscension {
   id       String                     @id @default(auto()) @map("_id") @db.ObjectId
   chunk    CharacterAscensionChunk
   fragment CharacterAscensionFragment
@@ -350,7 +358,7 @@ model character_ascension {
   @@map("character-ascension")
 }
 
-model character_experience {
+model CharacterExperience {
   id         String @id @default(auto()) @map("_id") @db.ObjectId
   experience Int
   id_        String @map("id")
@@ -360,33 +368,35 @@ model character_experience {
   @@map("character-experience")
 }
 
-model characters {
+model Character {
   id             String                     @id @default(auto()) @map("_id") @db.ObjectId
   affiliation    String
   birthday       String?
   constellation  String
-  constellations CharactersConstellations[]
+  constellations CharacterConstellation[]
   description    String
   gender         String?
-  images         CharactersImages
+  images         CharacterImages
   name           String
   nation         String
   outfits        CharactersOutfits[]
-  passiveTalents CharactersPassiveTalents[]
+  passiveTalents CharacterPassiveTalent[]
   rarity         Int
-  skillTalents   CharactersSkillTalents[]
+  skillTalents   CharacterSkillTalent[]
   specialDish    String?
   title          String?
   vision         String
   vision_key     String
   weapon         String
   weapon_type    String
+
+  @@map("characters")
 }
 
-model common_ascension {
+model CommonAscension {
   id         String                 @id @default(auto()) @map("_id") @db.ObjectId
   characters String[]
-  items      CommonAscensionItems[]
+  items      CommonAscensionItem[]
   name       String
   sources    String[]
   weapons    String[]
@@ -394,7 +404,7 @@ model common_ascension {
   @@map("common-ascension")
 }
 
-model cooking_ingredients {
+model CookingIngredient {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   description String
   image       String
@@ -405,57 +415,63 @@ model cooking_ingredients {
   @@map("cooking-ingredients")
 }
 
-model domains {
+model Domain {
   id                  String                @id @default(auto()) @map("_id") @db.ObjectId
   description         String
   location            String
   name                String
   nation              String
   recommendedElements String[]
-  requirements        DomainsRequirements[]
-  rewards             DomainsRewards[]
+  requirements        DomainRequirement[]
+  rewards             DomainReward[]
   type                String
+
+  @@map("domains")
 }
 
-model elements {
+model Element {
   id        String              @id @default(auto()) @map("_id") @db.ObjectId
   image     String
   key       String
   name      String
-  reactions ElementsReactions[]
+  reactions ElementReaction[]
+
+  @@map("elements")
 }
 
-model enemies {
+model Enemy {
   id                      String                         @id @default(auto()) @map("_id") @db.ObjectId
-  anemoboxer_vanguard     EnemiesAnemoboxerVanguard?     @map("anemoboxer-vanguard")
-  artifacts               EnemiesArtifacts[]
-  cryogunner_legionnaire  EnemiesCryogunnerLegionnaire?  @map("cryogunner-legionnaire")
+  anemoboxer_vanguard     EnemyAnemoboxerVanguard?     @map("anemoboxer-vanguard")
+  artifacts               EnemyArtifact[]
+  cryogunner_legionnaire  EnemyCryogunnerLegionnaire?  @map("cryogunner-legionnaire")
   description             String?
-  descriptions            EnemiesDescriptions[]
-  drops                   EnemiesDrops[]
-  electrohammer_vanguard  EnemiesElectrohammerVanguard?  @map("electrohammer-vanguard")
+  descriptions            EnemyDescription[]
+  drops                   EnemyDrop[]
+  electrohammer_vanguard  EnemyElectrohammerVanguard?  @map("electrohammer-vanguard")
   element                 String[]
-  elemental_description   EnemiesElementalDescription[]  @map("elemental-description")
-  elemental_descriptions  EnemiesElementalDescriptions[] @map("elemental-descriptions")
+  elemental_description   EnemyElementalDescription[]  @map("elemental-description")
+  elemental_descriptions  EnemyElementalDescriptions[] @map("elemental-descriptions")
   elements                String[]
   faction                 String?
   family                  String
-  frostarm_lawachurl      EnemiesFrostarmLawachurl?      @map("frostarm-lawachurl")
-  geochanter_bracers      EnemiesGeochanterBracers?      @map("geochanter-bracers")
-  hydrogunner_legionnaire EnemiesHydrogunnerLegionnaire? @map("hydrogunner-legionnaire")
+  frostarm_lawachurl      EnemyFrostarmLawachurl?      @map("frostarm-lawachurl")
+  geochanter_bracers      EnemyGeochanterBracers?      @map("geochanter-bracers")
+  hydrogunner_legionnaire EnemyHydrogunnerLegionnaire? @map("hydrogunner-legionnaire")
   id_                     String                         @map("id")
   image                   String?
-  images                  EnemiesImages?
+  images                  EnemyImages?
   mora_gained             Int?                           @map("mora-gained")
   name                    String
-  pyroslinger_bracers     EnemiesPyroslingerBracers?     @map("pyroslinger-bracers")
+  pyroslinger_bracers     EnemyPyroslingerBracers?     @map("pyroslinger-bracers")
   region                  String
-  stonehide_lawachurl     EnemiesStonehideLawachurl?     @map("stonehide-lawachurl")
+  stonehide_lawachurl     EnemyStonehideLawachurl?     @map("stonehide-lawachurl")
   title                   String?
   type                    String
+
+  @@map("enemies")
 }
 
-model foods {
+model Food {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
   description String
   effect      String
@@ -464,11 +480,13 @@ model foods {
   name        String
   proficiency Int?
   rarity      Int
-  recipe      FoodsRecipe[]
+  recipe      FoodRecipe[]
   type        String
+
+  @@map("foods")
 }
 
-model local_specialties {
+model LocalSpecialty {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   characters String[]
   id_        String   @map("id")
@@ -479,36 +497,40 @@ model local_specialties {
   @@map("local-specialties")
 }
 
-model nations {
+model Nation {
   id                String @id @default(auto()) @map("_id") @db.ObjectId
   archon            String
   controllingEntity String
   element           String
   image             String
   name              String
+
+  @@map("nations")
 }
 
-model potions {
+model Potion {
   id       String            @id @default(auto()) @map("_id") @db.ObjectId
-  crafting PotionsCrafting[]
+  crafting PotionCrafting[]
   effect   String
   image    String
   name     String
   rarity   Int
+
+  @@map("potions")
 }
 
-model talent_book {
+model TalentBook {
   id           String            @id @default(auto()) @map("_id") @db.ObjectId
   availability String[]
   characters   String[]
-  items        TalentBookItems[]
+  items        TalentBookItem[]
   name         String
   source       String
 
   @@map("talent-book")
 }
 
-model talent_boss {
+model TalentBoss {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   characters String[]
   id_        String   @map("id")
@@ -518,7 +540,7 @@ model talent_boss {
   @@map("talent-boss")
 }
 
-model weapon_ascension {
+model WeaponAscension {
   id           String                 @id @default(auto()) @map("_id") @db.ObjectId
   availability String[]
   items        WeaponAscensionItems[]
@@ -529,7 +551,7 @@ model weapon_ascension {
   @@map("weapon-ascension")
 }
 
-model weapon_experience {
+model WeaponExperience {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   experience Int
   id_        String   @map("id")
@@ -541,7 +563,7 @@ model weapon_experience {
   @@map("weapon-experience")
 }
 
-model weapons {
+model Weapon {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
   BaseAttack        Int?
   ascensionMaterial String?
@@ -554,4 +576,6 @@ model weapons {
   rarity            Int
   subStat           String
   type              String
+
+  @@map("weapons")
 }
