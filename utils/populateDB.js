@@ -10,7 +10,7 @@ const dbName = 'genshinDB';
 
 let db;
 
-const assetsURL = './assets/';
+const assetsURL = '../assets/';
 const dataURL = assetsURL + 'data/';
 const imageURL = assetsURL + 'images/';
 
