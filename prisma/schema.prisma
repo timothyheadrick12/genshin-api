@@ -1,0 +1,557 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type ArtifactsImages {
+  circlet_of_logos   String @map("circlet-of-logos")
+  flower_of_life     String @map("flower-of-life")
+  goblet_of_eonothem String @map("goblet-of-eonothem")
+  plume_of_death     String @map("plume-of-death")
+  sands_of_eon       String @map("sands-of-eon")
+}
+
+type BossesArtifacts {
+  max_rarity Int
+  name       String
+}
+
+type BossesDrops {
+  name   String
+  rarity Int
+  source String
+}
+
+type BossesImages {
+  ashen_heart             String? @map("ashen-heart")
+  bloodjade_branch        String? @map("bloodjade-branch")
+  dragon_lord_s_crown     String? @map("dragon-lord-s-crown")
+  dvalin_s_claw           String? @map("dvalin-s-claw")
+  dvalin_s_plume          String? @map("dvalin-s-plume")
+  dvalin_s_sigh           String? @map("dvalin-s-sigh")
+  gilded_scale            String? @map("gilded-scale")
+  hellfire_butterfly      String? @map("hellfire-butterfly")
+  icon                    String
+  molten_moment           String? @map("molten-moment")
+  portrait                String
+  ring_of_boreas          String? @map("ring-of-boreas")
+  shadow_of_the_warrior   String? @map("shadow-of-the-warrior")
+  shard_of_a_foul_legacy  String? @map("shard-of-a-foul-legacy")
+  spirit_locket_of_boreas String? @map("spirit-locket-of-boreas")
+  tail_of_boreas          String? @map("tail-of-boreas")
+  tusk_of_monoceros_caeli String? @map("tusk-of-monoceros-caeli")
+}
+
+type CharacterAscensionChunk {
+  id      String
+  image   String
+  name    String
+  rarity  Int
+  sources String[]
+}
+
+type CharacterAscensionFragment {
+  id      String
+  image   String
+  name    String
+  rarity  Int
+  sources String[]
+}
+
+type CharacterAscensionGemstone {
+  id      String
+  image   String
+  name    String
+  rarity  Int
+  sources String[]
+}
+
+type CharacterAscensionSliver {
+  id      String
+  image   String
+  name    String
+  rarity  Int
+  sources String[]
+}
+
+type CharactersConstellations {
+  description String
+  level       Int
+  name        String
+  unlock      String
+}
+
+type CharactersImages {
+  card                        String?
+  constellation               String?
+  constellation_1             String? @map("constellation-1")
+  constellation_2             String? @map("constellation-2")
+  constellation_3             String? @map("constellation-3")
+  constellation_4             String? @map("constellation-4")
+  constellation_5             String? @map("constellation-5")
+  constellation_6             String? @map("constellation-6")
+  gacha_card                  String? @map("gacha-card")
+  gacha_splash                String? @map("gacha-splash")
+  icon                        String?
+  icon_big                    String? @map("icon-big")
+  icon_big_aether             String? @map("icon-big-aether")
+  icon_big_lumine             String? @map("icon-big-lumine")
+  icon_side                   String? @map("icon-side")
+  icon_side_aether            String? @map("icon-side-aether")
+  icon_side_lumine            String? @map("icon-side-lumine")
+  outfit_opulent_splendor     String? @map("outfit-opulent-splendor")
+  outfit_orchids_evening_gown String? @map("outfit-orchids-evening-gown")
+  outfit_sea_breeze_dandelion String? @map("outfit-sea-breeze-dandelion")
+  outfit_summertime_sparkle   String? @map("outfit-summertime-sparkle")
+  portrait                    String?
+  portraitf                   String?
+  portraitm                   String?
+  talent_burst                String? @map("talent-burst")
+  talent_na                   String? @map("talent-na")
+  talent_passive_0            String? @map("talent-passive-0")
+  talent_passive_1            String? @map("talent-passive-1")
+  talent_passive_2            String? @map("talent-passive-2")
+  talent_passive_misc         String? @map("talent-passive-misc")
+  talent_skill                String? @map("talent-skill")
+}
+
+type CharactersOutfits {
+  description String
+  image       String
+  name        String
+  price       Int
+  rarity      Int
+  type        String
+}
+
+type CharactersPassiveTalents {
+  description String
+  level       Int?
+  name        String
+  unlock      String
+}
+
+type CharactersSkillTalents {
+  description String
+  name        String
+  type        String?
+  unlock      String
+  upgrades    CharactersSkillTalentsUpgrades[]
+}
+
+type CharactersSkillTalentsUpgrades {
+  name  String
+  value String
+}
+
+type CommonAscensionItems {
+  id     String
+  image  String?
+  name   String
+  rarity Int
+}
+
+type DomainsRequirements {
+  adventureRank    Int
+  level            Int
+  leyLineDisorder  String[]
+  recommendedLevel Int
+}
+
+type DomainsRewards {
+  day     String
+  details DomainsRewardsDetails[]
+}
+
+type DomainsRewardsDetails {
+  adventureExperience     Int
+  companionshipExperience Int
+  drops                   DomainsRewardsDetailsDrops[]
+  items                   DomainsRewardsDetailsItems[]
+  level                   Int
+  mora                    Int
+}
+
+type DomainsRewardsDetailsDrops {
+  drop_max Int
+  drop_min Int
+  name     String
+  rarity   String?
+}
+
+type DomainsRewardsDetailsItems {
+  drop_max Int
+  drop_min Int
+  name     String
+  rarity   String?
+}
+
+type ElementsReactions {
+  description String
+  elements    String[]
+  name        String
+}
+
+type EnemiesAnemoboxerVanguard {
+  element String
+  id      String
+  name    String
+  type    String
+}
+
+type EnemiesArtifacts {
+  name   String
+  rarity String
+  set    String
+}
+
+type EnemiesCryogunnerLegionnaire {
+  element String
+  id      String
+  name    String
+  type    String
+}
+
+type EnemiesDescriptions {
+  description String
+  name        String
+}
+
+type EnemiesDrops {
+  minimum_level Int    @map("minimum-level")
+  name          String
+  rarity        Int
+}
+
+type EnemiesElectrohammerVanguard {
+  element String
+  id      String
+  name    String
+  type    String
+}
+
+type EnemiesElementalDescription {
+  description String
+  element     String
+}
+
+type EnemiesElementalDescriptions {
+  description String
+  element     String
+}
+
+type EnemiesFrostarmLawachurl {
+  description String
+  id          String
+  name        String
+  region      String
+}
+
+type EnemiesGeochanterBracers {
+  element String
+  id      String
+  name    String
+  type    String
+}
+
+type EnemiesHydrogunnerLegionnaire {
+  element String
+  id      String
+  name    String
+  type    String
+}
+
+type EnemiesImages {
+  icon     String
+  portrait String
+}
+
+type EnemiesPyroslingerBracers {
+  element String
+  id      String
+  name    String
+  type    String
+}
+
+type EnemiesStonehideLawachurl {
+  description String
+  id          String
+  name        String
+  region      String
+}
+
+type FoodsRecipe {
+  item     String
+  quantity Int
+}
+
+type PotionsCrafting {
+  item     String
+  quantity Int
+}
+
+type TalentBookItems {
+  id     String
+  image  String
+  name   String
+  rarity Int
+}
+
+type WeaponAscensionItems {
+  id     String
+  image  String?
+  name   String
+  rarity Int
+}
+
+model artifacts {
+  id          String           @id @default(auto()) @map("_id") @db.ObjectId
+  piece_bonus_1 String?          @map("1-piece_bonus")
+  piece_bonus_2 String?          @map("2-piece_bonus")
+  piece_bonus_4 String?          @map("4-piece_bonus")
+  image       String?
+  images      ArtifactsImages?
+  max_rarity  Int
+  name        String
+}
+
+model boss_material {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  characters String[]
+  image      String
+  name       String
+  source     String
+
+  @@map("boss-material")
+}
+
+model bosses {
+  id          String            @id @default(auto()) @map("_id") @db.ObjectId
+  artifacts   BossesArtifacts[]
+  description String
+  drops       BossesDrops[]
+  images      BossesImages
+  name        String
+  type        String
+}
+
+model character_ascension {
+  id       String                     @id @default(auto()) @map("_id") @db.ObjectId
+  chunk    CharacterAscensionChunk
+  fragment CharacterAscensionFragment
+  gemstone CharacterAscensionGemstone
+  name     String
+  sliver   CharacterAscensionSliver
+
+  @@map("character-ascension")
+}
+
+model character_experience {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  experience Int
+  id_        String @map("id")
+  name       String
+  rarity     Int
+
+  @@map("character-experience")
+}
+
+model characters {
+  id             String                     @id @default(auto()) @map("_id") @db.ObjectId
+  affiliation    String
+  birthday       String?
+  constellation  String
+  constellations CharactersConstellations[]
+  description    String
+  gender         String?
+  images         CharactersImages
+  name           String
+  nation         String
+  outfits        CharactersOutfits[]
+  passiveTalents CharactersPassiveTalents[]
+  rarity         Int
+  skillTalents   CharactersSkillTalents[]
+  specialDish    String?
+  title          String?
+  vision         String
+  vision_key     String
+  weapon         String
+  weapon_type    String
+}
+
+model common_ascension {
+  id         String                 @id @default(auto()) @map("_id") @db.ObjectId
+  characters String[]
+  items      CommonAscensionItems[]
+  name       String
+  sources    String[]
+  weapons    String[]
+
+  @@map("common-ascension")
+}
+
+model cooking_ingredients {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  description String
+  image       String
+  name        String
+  rarity      Int?
+  sources     String[]
+
+  @@map("cooking-ingredients")
+}
+
+model domains {
+  id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+  description         String
+  location            String
+  name                String
+  nation              String
+  recommendedElements String[]
+  requirements        DomainsRequirements[]
+  rewards             DomainsRewards[]
+  type                String
+}
+
+model elements {
+  id        String              @id @default(auto()) @map("_id") @db.ObjectId
+  image     String
+  key       String
+  name      String
+  reactions ElementsReactions[]
+}
+
+model enemies {
+  id                      String                         @id @default(auto()) @map("_id") @db.ObjectId
+  anemoboxer_vanguard     EnemiesAnemoboxerVanguard?     @map("anemoboxer-vanguard")
+  artifacts               EnemiesArtifacts[]
+  cryogunner_legionnaire  EnemiesCryogunnerLegionnaire?  @map("cryogunner-legionnaire")
+  description             String?
+  descriptions            EnemiesDescriptions[]
+  drops                   EnemiesDrops[]
+  electrohammer_vanguard  EnemiesElectrohammerVanguard?  @map("electrohammer-vanguard")
+  element                 String[]
+  elemental_description   EnemiesElementalDescription[]  @map("elemental-description")
+  elemental_descriptions  EnemiesElementalDescriptions[] @map("elemental-descriptions")
+  elements                String[]
+  faction                 String?
+  family                  String
+  frostarm_lawachurl      EnemiesFrostarmLawachurl?      @map("frostarm-lawachurl")
+  geochanter_bracers      EnemiesGeochanterBracers?      @map("geochanter-bracers")
+  hydrogunner_legionnaire EnemiesHydrogunnerLegionnaire? @map("hydrogunner-legionnaire")
+  id_                     String                         @map("id")
+  image                   String?
+  images                  EnemiesImages?
+  mora_gained             Int?                           @map("mora-gained")
+  name                    String
+  pyroslinger_bracers     EnemiesPyroslingerBracers?     @map("pyroslinger-bracers")
+  region                  String
+  stonehide_lawachurl     EnemiesStonehideLawachurl?     @map("stonehide-lawachurl")
+  title                   String?
+  type                    String
+}
+
+model foods {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  description String
+  effect      String
+  hasRecipe   Boolean
+  image       String
+  name        String
+  proficiency Int?
+  rarity      Int
+  recipe      FoodsRecipe[]
+  type        String
+}
+
+model local_specialties {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  characters String[]
+  id_        String   @map("id")
+  image      String
+  location   String
+  name       String
+
+  @@map("local-specialties")
+}
+
+model nations {
+  id                String @id @default(auto()) @map("_id") @db.ObjectId
+  archon            String
+  controllingEntity String
+  element           String
+  image             String
+  name              String
+}
+
+model potions {
+  id       String            @id @default(auto()) @map("_id") @db.ObjectId
+  crafting PotionsCrafting[]
+  effect   String
+  image    String
+  name     String
+  rarity   Int
+}
+
+model talent_book {
+  id           String            @id @default(auto()) @map("_id") @db.ObjectId
+  availability String[]
+  characters   String[]
+  items        TalentBookItems[]
+  name         String
+  source       String
+
+  @@map("talent-book")
+}
+
+model talent_boss {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  characters String[]
+  id_        String   @map("id")
+  image      String?
+  name       String
+
+  @@map("talent-boss")
+}
+
+model weapon_ascension {
+  id           String                 @id @default(auto()) @map("_id") @db.ObjectId
+  availability String[]
+  items        WeaponAscensionItems[]
+  name         String
+  source       String
+  weapons      String[]
+
+  @@map("weapon-ascension")
+}
+
+model weapon_experience {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  experience Int
+  id_        String   @map("id")
+  image      String
+  name       String
+  rarity     Int
+  source     String[]
+
+  @@map("weapon-experience")
+}
+
+model weapons {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  BaseAttack        Int?
+  ascensionMaterial String?
+  baseAttack        Int?
+  image             String?
+  location          String
+  name              String
+  passiveDesc       String
+  passiveName       String
+  rarity            Int
+  subStat           String
+  type              String
+}

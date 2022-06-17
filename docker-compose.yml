@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+  mongo1:
+    container_name: mongo1
+    image: mongo
+    ports:
+      - 27017:27017
+    restart: always
+    command: ['--bind_ip_all', '--replSet', 'rs']
+  mongo2:
+    container_name: mongo2
+    image: mongo
+    ports:
+      - 27018:27017
+    restart: always
+    command: ['--bind_ip_all', '--replSet', 'rs']
+  mongo3:
+    container_name: mongo3
+    image: mongo
+    ports:
+      - 27019:27017
+    restart: always
+    command: ['--bind_ip_all', '--replSet', 'rs']
+  replica_set:
+    image: mongo
+    container_name: replica_set
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    volumes:
+      - ./initiate_replica_set.sh:/initiate_replica_set.sh
+    entrypoint:
+      - /initiate_replica_set.sh
