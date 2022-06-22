@@ -45,6 +45,7 @@ export interface NexusGenObjects {
     affiliation: string; // String!
     birthday?: string | null; // String
     constellation: string; // String!
+    constellations?: Array<NexusGenRootTypes['CharacterConstellation'] | null> | null; // [CharacterConstellation]
     description: string; // String!
     gender?: string | null; // String
     id: string; // ID!
@@ -61,6 +62,12 @@ export interface NexusGenObjects {
   CharacterConnection: { // root type
     edges?: Array<NexusGenRootTypes['CharacterEdge'] | null> | null; // [CharacterEdge]
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  CharacterConstellation: { // root type
+    description?: string | null; // String
+    level?: number | null; // Int
+    name?: string | null; // String
+    unlock?: string | null; // String
   }
   CharacterEdge: { // root type
     cursor: string; // String!
@@ -90,6 +97,7 @@ export interface NexusGenFieldTypes {
     affiliation: string; // String!
     birthday: string | null; // String
     constellation: string; // String!
+    constellations: Array<NexusGenRootTypes['CharacterConstellation'] | null> | null; // [CharacterConstellation]
     description: string; // String!
     gender: string | null; // String
     id: string; // ID!
@@ -106,6 +114,12 @@ export interface NexusGenFieldTypes {
   CharacterConnection: { // field return type
     edges: Array<NexusGenRootTypes['CharacterEdge'] | null> | null; // [CharacterEdge]
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  CharacterConstellation: { // field return type
+    description: string | null; // String
+    level: number | null; // Int
+    name: string | null; // String
+    unlock: string | null; // String
   }
   CharacterEdge: { // field return type
     cursor: string; // String!
@@ -128,6 +142,7 @@ export interface NexusGenFieldTypeNames {
     affiliation: 'String'
     birthday: 'String'
     constellation: 'String'
+    constellations: 'CharacterConstellation'
     description: 'String'
     gender: 'String'
     id: 'ID'
@@ -144,6 +159,12 @@ export interface NexusGenFieldTypeNames {
   CharacterConnection: { // field return type name
     edges: 'CharacterEdge'
     pageInfo: 'PageInfo'
+  }
+  CharacterConstellation: { // field return type name
+    description: 'String'
+    level: 'Int'
+    name: 'String'
+    unlock: 'String'
   }
   CharacterEdge: { // field return type name
     cursor: 'String'

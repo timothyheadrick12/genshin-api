@@ -6,6 +6,7 @@ type Character {
   affiliation: String!
   birthday: String
   constellation: String!
+  constellations: [CharacterConstellation]
   description: String!
   gender: String
   id: ID!
@@ -30,6 +31,20 @@ type CharacterConnection {
   https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
   """
   pageInfo: PageInfo!
+}
+
+type CharacterConstellation {
+  """Description of this constellation."""
+  description: String
+
+  """Level of this constellation."""
+  level: Int
+
+  """The name of this constellation."""
+  name: String
+
+  """Item required to unlock this constellation."""
+  unlock: String
 }
 
 type CharacterEdge {
