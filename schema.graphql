@@ -10,9 +10,13 @@ type Character {
   description: String!
   gender: String
   id: ID!
+  images: CharacterImages
   name: String!
   nation: String!
+  outfits: [CharacterOutfit]
+  passiveTalents: [CharacterPassiveTalent]
   rarity: Int!
+  skillTalents: [CharacterSkillTalent]
   specialDish: String
   title: String
   vision: String!
@@ -55,6 +59,81 @@ type CharacterEdge {
   node: Character
 }
 
+type CharacterImages {
+  card: String
+  constellation: String
+  constellation_1: String
+  constellation_2: String
+  constellation_3: String
+  constellation_4: String
+  constellation_5: String
+  constellation_6: String
+  gacha_card: String
+  gacha_splash: String
+  icon: String
+  icon_big: String
+  icon_big_aether: String
+  icon_big_lumine: String
+  outfit_opulent_splendor: String
+  outfit_orchids_evening_gown: String
+  outfit_sea_breeze_dandelion: String
+  outfit_summertime_sparkle: String
+  portrait: String
+  portraitf: String
+  portraitm: String
+  talent_burst: String
+  talent_na: String
+  talent_passive_0: String
+  talent_passive_1: String
+  talent_passive_2: String
+  talent_passive_misc: String
+  talent_skill: String
+}
+
+type CharacterOutfit {
+  description: String
+  image: String
+  name: String
+  price: Int
+  rarity: Int
+  type: String
+}
+
+type CharacterPassiveTalent {
+  description: String
+  level: Int
+  name: String
+  unlock: String
+}
+
+type CharacterSkillTalent {
+  description: String
+  name: String
+  type: String
+  unlock: String
+  upgrades: [CharacterSkillTalentUpgrade]
+}
+
+type CharacterSkillTalentUpgrade {
+  name: String
+  value: String
+}
+
+input FilterInputType {
+  field: String!
+  int: Int
+  ints: [Int]
+  operator: String
+  string: String
+  strings: [String]
+}
+
+input FilterLogicInputType {
+  AND: [FilterInputType]
+  NOT: [FilterInputType]
+  OR: [FilterInputType]
+}
+
 """
 PageInfo cursor, as defined in https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
 """
@@ -81,32 +160,26 @@ type PageInfo {
 }
 
 type Query {
-  character(sort: SortEnum): Character
+  character(filter: FilterInputType, lFilter: FilterLogicInputType, sort: SortInputType): Character
   characters(
     """Returns the elements in the list that come after the specified cursor"""
     after: String
 
     """Returns the elements in the list that come before the specified cursor"""
     before: String
+    filter: FilterInputType
 
     """Returns the first n elements from the list."""
     first: Int
+    lFilter: FilterLogicInputType
 
     """Returns the last n elements from the list."""
     last: Int
-    sort: SortEnum
+    sort: SortInputType
   ): CharacterConnection
 }
 
-enum SortEnum {
-  AFFILIATION_ASC
-  AFFILIATION_DESC
-  BIRTHDAY_ASC
-  BIRTHDAY_DESC
-  CONSTELLATION_ASC
-  CONSTELLATION_DESC
-  GENDER_ASC
-  GENDER_DESC
-  ID_ASC
-  ID_DESC
+input SortInputType {
+  asc: Boolean!
+  field: String!
 }

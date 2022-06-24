@@ -26,10 +26,26 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  FilterInputType: { // input type
+    field: string; // String!
+    int?: number | null; // Int
+    ints?: Array<number | null> | null; // [Int]
+    operator?: string | null; // String
+    string?: string | null; // String
+    strings?: Array<string | null> | null; // [String]
+  }
+  FilterLogicInputType: { // input type
+    AND?: Array<NexusGenInputs['FilterInputType'] | null> | null; // [FilterInputType]
+    NOT?: Array<NexusGenInputs['FilterInputType'] | null> | null; // [FilterInputType]
+    OR?: Array<NexusGenInputs['FilterInputType'] | null> | null; // [FilterInputType]
+  }
+  SortInputType: { // input type
+    asc: boolean; // Boolean!
+    field: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
-  SortEnum: {"affiliation":"asc"} | {"affiliation":"desc"} | {"birthday":"asc"} | {"birthday":"desc"} | {"constellation":"asc"} | {"constellation":"desc"} | {"gender":"asc"} | {"gender":"desc"} | {"id":"asc"} | {"id":"desc"}
 }
 
 export interface NexusGenScalars {
@@ -49,9 +65,13 @@ export interface NexusGenObjects {
     description: string; // String!
     gender?: string | null; // String
     id: string; // ID!
+    images?: NexusGenRootTypes['CharacterImages'] | null; // CharacterImages
     name: string; // String!
     nation: string; // String!
+    outfits?: Array<NexusGenRootTypes['CharacterOutfit'] | null> | null; // [CharacterOutfit]
+    passiveTalents?: Array<NexusGenRootTypes['CharacterPassiveTalent'] | null> | null; // [CharacterPassiveTalent]
     rarity: number; // Int!
+    skillTalents?: Array<NexusGenRootTypes['CharacterSkillTalent'] | null> | null; // [CharacterSkillTalent]
     specialDish?: string | null; // String
     title?: string | null; // String
     vision: string; // String!
@@ -73,6 +93,61 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node?: NexusGenRootTypes['Character'] | null; // Character
   }
+  CharacterImages: { // root type
+    card?: string | null; // String
+    constellation?: string | null; // String
+    constellation_1?: string | null; // String
+    constellation_2?: string | null; // String
+    constellation_3?: string | null; // String
+    constellation_4?: string | null; // String
+    constellation_5?: string | null; // String
+    constellation_6?: string | null; // String
+    gacha_card?: string | null; // String
+    gacha_splash?: string | null; // String
+    icon?: string | null; // String
+    icon_big?: string | null; // String
+    icon_big_aether?: string | null; // String
+    icon_big_lumine?: string | null; // String
+    outfit_opulent_splendor?: string | null; // String
+    outfit_orchids_evening_gown?: string | null; // String
+    outfit_sea_breeze_dandelion?: string | null; // String
+    outfit_summertime_sparkle?: string | null; // String
+    portrait?: string | null; // String
+    portraitf?: string | null; // String
+    portraitm?: string | null; // String
+    talent_burst?: string | null; // String
+    talent_na?: string | null; // String
+    talent_passive_0?: string | null; // String
+    talent_passive_1?: string | null; // String
+    talent_passive_2?: string | null; // String
+    talent_passive_misc?: string | null; // String
+    talent_skill?: string | null; // String
+  }
+  CharacterOutfit: { // root type
+    description?: string | null; // String
+    image?: string | null; // String
+    name?: string | null; // String
+    price?: number | null; // Int
+    rarity?: number | null; // Int
+    type?: string | null; // String
+  }
+  CharacterPassiveTalent: { // root type
+    description?: string | null; // String
+    level?: number | null; // Int
+    name?: string | null; // String
+    unlock?: string | null; // String
+  }
+  CharacterSkillTalent: { // root type
+    description?: string | null; // String
+    name?: string | null; // String
+    type?: string | null; // String
+    unlock?: string | null; // String
+    upgrades?: Array<NexusGenRootTypes['CharacterSkillTalentUpgrade'] | null> | null; // [CharacterSkillTalentUpgrade]
+  }
+  CharacterSkillTalentUpgrade: { // root type
+    name?: string | null; // String
+    value?: string | null; // String
+  }
   PageInfo: { // root type
     endCursor?: string | null; // String
     hasNextPage: boolean; // Boolean!
@@ -90,7 +165,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Character: { // field return type
@@ -101,9 +176,13 @@ export interface NexusGenFieldTypes {
     description: string; // String!
     gender: string | null; // String
     id: string; // ID!
+    images: NexusGenRootTypes['CharacterImages'] | null; // CharacterImages
     name: string; // String!
     nation: string; // String!
+    outfits: Array<NexusGenRootTypes['CharacterOutfit'] | null> | null; // [CharacterOutfit]
+    passiveTalents: Array<NexusGenRootTypes['CharacterPassiveTalent'] | null> | null; // [CharacterPassiveTalent]
     rarity: number; // Int!
+    skillTalents: Array<NexusGenRootTypes['CharacterSkillTalent'] | null> | null; // [CharacterSkillTalent]
     specialDish: string | null; // String
     title: string | null; // String
     vision: string; // String!
@@ -124,6 +203,61 @@ export interface NexusGenFieldTypes {
   CharacterEdge: { // field return type
     cursor: string; // String!
     node: NexusGenRootTypes['Character'] | null; // Character
+  }
+  CharacterImages: { // field return type
+    card: string | null; // String
+    constellation: string | null; // String
+    constellation_1: string | null; // String
+    constellation_2: string | null; // String
+    constellation_3: string | null; // String
+    constellation_4: string | null; // String
+    constellation_5: string | null; // String
+    constellation_6: string | null; // String
+    gacha_card: string | null; // String
+    gacha_splash: string | null; // String
+    icon: string | null; // String
+    icon_big: string | null; // String
+    icon_big_aether: string | null; // String
+    icon_big_lumine: string | null; // String
+    outfit_opulent_splendor: string | null; // String
+    outfit_orchids_evening_gown: string | null; // String
+    outfit_sea_breeze_dandelion: string | null; // String
+    outfit_summertime_sparkle: string | null; // String
+    portrait: string | null; // String
+    portraitf: string | null; // String
+    portraitm: string | null; // String
+    talent_burst: string | null; // String
+    talent_na: string | null; // String
+    talent_passive_0: string | null; // String
+    talent_passive_1: string | null; // String
+    talent_passive_2: string | null; // String
+    talent_passive_misc: string | null; // String
+    talent_skill: string | null; // String
+  }
+  CharacterOutfit: { // field return type
+    description: string | null; // String
+    image: string | null; // String
+    name: string | null; // String
+    price: number | null; // Int
+    rarity: number | null; // Int
+    type: string | null; // String
+  }
+  CharacterPassiveTalent: { // field return type
+    description: string | null; // String
+    level: number | null; // Int
+    name: string | null; // String
+    unlock: string | null; // String
+  }
+  CharacterSkillTalent: { // field return type
+    description: string | null; // String
+    name: string | null; // String
+    type: string | null; // String
+    unlock: string | null; // String
+    upgrades: Array<NexusGenRootTypes['CharacterSkillTalentUpgrade'] | null> | null; // [CharacterSkillTalentUpgrade]
+  }
+  CharacterSkillTalentUpgrade: { // field return type
+    name: string | null; // String
+    value: string | null; // String
   }
   PageInfo: { // field return type
     endCursor: string | null; // String
@@ -146,9 +280,13 @@ export interface NexusGenFieldTypeNames {
     description: 'String'
     gender: 'String'
     id: 'ID'
+    images: 'CharacterImages'
     name: 'String'
     nation: 'String'
+    outfits: 'CharacterOutfit'
+    passiveTalents: 'CharacterPassiveTalent'
     rarity: 'Int'
+    skillTalents: 'CharacterSkillTalent'
     specialDish: 'String'
     title: 'String'
     vision: 'String'
@@ -170,6 +308,61 @@ export interface NexusGenFieldTypeNames {
     cursor: 'String'
     node: 'Character'
   }
+  CharacterImages: { // field return type name
+    card: 'String'
+    constellation: 'String'
+    constellation_1: 'String'
+    constellation_2: 'String'
+    constellation_3: 'String'
+    constellation_4: 'String'
+    constellation_5: 'String'
+    constellation_6: 'String'
+    gacha_card: 'String'
+    gacha_splash: 'String'
+    icon: 'String'
+    icon_big: 'String'
+    icon_big_aether: 'String'
+    icon_big_lumine: 'String'
+    outfit_opulent_splendor: 'String'
+    outfit_orchids_evening_gown: 'String'
+    outfit_sea_breeze_dandelion: 'String'
+    outfit_summertime_sparkle: 'String'
+    portrait: 'String'
+    portraitf: 'String'
+    portraitm: 'String'
+    talent_burst: 'String'
+    talent_na: 'String'
+    talent_passive_0: 'String'
+    talent_passive_1: 'String'
+    talent_passive_2: 'String'
+    talent_passive_misc: 'String'
+    talent_skill: 'String'
+  }
+  CharacterOutfit: { // field return type name
+    description: 'String'
+    image: 'String'
+    name: 'String'
+    price: 'Int'
+    rarity: 'Int'
+    type: 'String'
+  }
+  CharacterPassiveTalent: { // field return type name
+    description: 'String'
+    level: 'Int'
+    name: 'String'
+    unlock: 'String'
+  }
+  CharacterSkillTalent: { // field return type name
+    description: 'String'
+    name: 'String'
+    type: 'String'
+    unlock: 'String'
+    upgrades: 'CharacterSkillTalentUpgrade'
+  }
+  CharacterSkillTalentUpgrade: { // field return type name
+    name: 'String'
+    value: 'String'
+  }
   PageInfo: { // field return type name
     endCursor: 'String'
     hasNextPage: 'Boolean'
@@ -185,14 +378,18 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Query: {
     character: { // args
-      sort?: NexusGenEnums['SortEnum'] | null; // SortEnum
+      filter?: NexusGenInputs['FilterInputType'] | null; // FilterInputType
+      lFilter?: NexusGenInputs['FilterLogicInputType'] | null; // FilterLogicInputType
+      sort?: NexusGenInputs['SortInputType'] | null; // SortInputType
     }
     characters: { // args
       after?: string | null; // String
       before?: string | null; // String
+      filter?: NexusGenInputs['FilterInputType'] | null; // FilterInputType
       first?: number | null; // Int
+      lFilter?: NexusGenInputs['FilterLogicInputType'] | null; // FilterLogicInputType
       last?: number | null; // Int
-      sort?: NexusGenEnums['SortEnum'] | null; // SortEnum
+      sort?: NexusGenInputs['SortInputType'] | null; // SortInputType
     }
   }
 }
@@ -205,9 +402,9 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = keyof NexusGenEnums;
+export type NexusGenEnumNames = never;
 
 export type NexusGenInterfaceNames = never;
 

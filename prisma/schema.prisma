@@ -123,7 +123,7 @@ type CharacterImages {
   talent_skill                String? @map("talent-skill")
 }
 
-type CharactersOutfits {
+type CharacterOutfit {
   description String
   image       String
   name        String
@@ -379,7 +379,7 @@ model Character {
   images         CharacterImages
   name           String
   nation         String
-  outfits        CharactersOutfits[]
+  outfits        CharacterOutfit[]
   passiveTalents CharacterPassiveTalent[]
   rarity         Int
   skillTalents   CharacterSkillTalent[]
