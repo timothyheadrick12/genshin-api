@@ -57,6 +57,31 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Artifact: { // root type
+    id: string; // ID!
+    image?: string | null; // String
+    images?: NexusGenRootTypes['ArtifactImages'] | null; // ArtifactImages
+    max_rarity: number; // Int!
+    name: string; // String!
+    piece_bonus_1?: string | null; // String
+    piece_bonus_2?: string | null; // String
+    piece_bonus_4?: string | null; // String
+  }
+  ArtifactConnection: { // root type
+    edges?: Array<NexusGenRootTypes['ArtifactEdge'] | null> | null; // [ArtifactEdge]
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  ArtifactEdge: { // root type
+    cursor: string; // String!
+    node?: NexusGenRootTypes['Artifact'] | null; // Artifact
+  }
+  ArtifactImages: { // root type
+    circlet_of_logos?: string | null; // String
+    flower_of_life?: string | null; // String
+    goblet_of_eonothem?: string | null; // String
+    plume_of_death?: string | null; // String
+    sands_of_eon?: string | null; // String
+  }
   Character: { // root type
     affiliation: string; // String!
     birthday?: string | null; // String
@@ -168,6 +193,31 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Artifact: { // field return type
+    id: string; // ID!
+    image: string | null; // String
+    images: NexusGenRootTypes['ArtifactImages'] | null; // ArtifactImages
+    max_rarity: number; // Int!
+    name: string; // String!
+    piece_bonus_1: string | null; // String
+    piece_bonus_2: string | null; // String
+    piece_bonus_4: string | null; // String
+  }
+  ArtifactConnection: { // field return type
+    edges: Array<NexusGenRootTypes['ArtifactEdge'] | null> | null; // [ArtifactEdge]
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  ArtifactEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Artifact'] | null; // Artifact
+  }
+  ArtifactImages: { // field return type
+    circlet_of_logos: string | null; // String
+    flower_of_life: string | null; // String
+    goblet_of_eonothem: string | null; // String
+    plume_of_death: string | null; // String
+    sands_of_eon: string | null; // String
+  }
   Character: { // field return type
     affiliation: string; // String!
     birthday: string | null; // String
@@ -266,12 +316,39 @@ export interface NexusGenFieldTypes {
     startCursor: string | null; // String
   }
   Query: { // field return type
+    artifact: NexusGenRootTypes['Artifact'] | null; // Artifact
+    artifacts: NexusGenRootTypes['ArtifactConnection'] | null; // ArtifactConnection
     character: NexusGenRootTypes['Character'] | null; // Character
     characters: NexusGenRootTypes['CharacterConnection'] | null; // CharacterConnection
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Artifact: { // field return type name
+    id: 'ID'
+    image: 'String'
+    images: 'ArtifactImages'
+    max_rarity: 'Int'
+    name: 'String'
+    piece_bonus_1: 'String'
+    piece_bonus_2: 'String'
+    piece_bonus_4: 'String'
+  }
+  ArtifactConnection: { // field return type name
+    edges: 'ArtifactEdge'
+    pageInfo: 'PageInfo'
+  }
+  ArtifactEdge: { // field return type name
+    cursor: 'String'
+    node: 'Artifact'
+  }
+  ArtifactImages: { // field return type name
+    circlet_of_logos: 'String'
+    flower_of_life: 'String'
+    goblet_of_eonothem: 'String'
+    plume_of_death: 'String'
+    sands_of_eon: 'String'
+  }
   Character: { // field return type name
     affiliation: 'String'
     birthday: 'String'
@@ -370,6 +447,8 @@ export interface NexusGenFieldTypeNames {
     startCursor: 'String'
   }
   Query: { // field return type name
+    artifact: 'Artifact'
+    artifacts: 'ArtifactConnection'
     character: 'Character'
     characters: 'CharacterConnection'
   }
@@ -377,6 +456,20 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Query: {
+    artifact: { // args
+      filter?: NexusGenInputs['FilterInputType'] | null; // FilterInputType
+      lFilter?: NexusGenInputs['FilterLogicInputType'] | null; // FilterLogicInputType
+      sort?: NexusGenInputs['SortInputType'] | null; // SortInputType
+    }
+    artifacts: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      filter?: NexusGenInputs['FilterInputType'] | null; // FilterInputType
+      first?: number | null; // Int
+      lFilter?: NexusGenInputs['FilterLogicInputType'] | null; // FilterLogicInputType
+      last?: number | null; // Int
+      sort?: NexusGenInputs['SortInputType'] | null; // SortInputType
+    }
     character: { // args
       filter?: NexusGenInputs['FilterInputType'] | null; // FilterInputType
       lFilter?: NexusGenInputs['FilterLogicInputType'] | null; // FilterLogicInputType

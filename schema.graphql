@@ -2,6 +2,45 @@
 ### Do not make changes to this file directly
 
 
+type Artifact {
+  id: ID!
+  image: String
+  images: ArtifactImages
+  max_rarity: Int!
+  name: String!
+  piece_bonus_1: String
+  piece_bonus_2: String
+  piece_bonus_4: String
+}
+
+type ArtifactConnection {
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-Edge-Types
+  """
+  edges: [ArtifactEdge]
+
+  """
+  https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+type ArtifactEdge {
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Cursor"""
+  cursor: String!
+
+  """https://facebook.github.io/relay/graphql/connections.htm#sec-Node"""
+  node: Artifact
+}
+
+type ArtifactImages {
+  circlet_of_logos: String
+  flower_of_life: String
+  goblet_of_eonothem: String
+  plume_of_death: String
+  sands_of_eon: String
+}
+
 type Character {
   affiliation: String!
   birthday: String
@@ -160,6 +199,23 @@ type PageInfo {
 }
 
 type Query {
+  artifact(filter: FilterInputType, lFilter: FilterLogicInputType, sort: SortInputType): Artifact
+  artifacts(
+    """Returns the elements in the list that come after the specified cursor"""
+    after: String
+
+    """Returns the elements in the list that come before the specified cursor"""
+    before: String
+    filter: FilterInputType
+
+    """Returns the first n elements from the list."""
+    first: Int
+    lFilter: FilterLogicInputType
+
+    """Returns the last n elements from the list."""
+    last: Int
+    sort: SortInputType
+  ): ArtifactConnection
   character(filter: FilterInputType, lFilter: FilterLogicInputType, sort: SortInputType): Character
   characters(
     """Returns the elements in the list that come after the specified cursor"""

@@ -34,9 +34,7 @@ export const filterArgs = {
 };
 
 //This should be adapted to work on embedded types
-export const filterResolver = (
-  args: any
-): Prisma.CharacterWhereInput | undefined => {
+export const filterResolver = (args: any): any => {
   if (args.lFilter) {
     return {
       AND: (() => {
